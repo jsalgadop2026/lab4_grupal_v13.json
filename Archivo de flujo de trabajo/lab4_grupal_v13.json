@@ -1,0 +1,1002 @@
+{
+  "id": "ca03b820-e441-4e8f-a971-be587d40c356",
+  "revision": 0,
+  "last_node_id": 20,
+  "last_link_id": 31,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "Note",
+      "pos": [
+        -81.59996144711468,
+        -147.6000642728135
+      ],
+      "size": [
+        900,
+        180
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "WORKFLOW MARINO — BUCEADOR EN EL FONDO DEL MAR CON CAMISETA PERUANA",
+      "properties": {},
+      "widgets_values": [
+        "FLUJO DE TRABAJO MARINO — BUCEADOR EN FONDO DEL MAR CON CAMISETA PERUANA\n\nCARACTERÍSTICAS:\n• Genera escenas de buceador en el fondo marino\n• Camiseta peruana roja y blanca visible en wetsuit\n• Text2Img (generación pura sin referencia)\n• Coherencia visual: equipo de buceo, vida marina, iluminación submarina\n\nINSTRUCCIONES:\n1. CheckpointLoaderSimple → seleccionar modelo SD1.5\n2. Presionar Run (no requiere carga de imagen)\n\nVARIACIONES:\n  LEVE:     arrecife de coral, luz natural, agua clara | euler | steps 25 | cfg 7.0 | denoise 0.30\n  MODERADO: exploración submarina profunda, vida marina exótica | dpmpp | steps 30 | cfg 8.5 | denoise 0.60\n  FUERTE:   abismo marino épico, bioluminiscencia, criaturas profundas | adaptive | steps 40 | cfg 12.0 | denoise 0.85"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 2,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        108.80005838931032,
+        237.19977856165764
+      ],
+      "size": [
+        380,
+        131.59375
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 2,
+          "links": [
+            8,
+            9,
+            10,
+            28
+          ]
+        }
+      ],
+      "title": "← PASO 1: SELECCIONAR MODELO SD1.5",
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "dreamshaper_8.safetensors"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1013.1994602447755,
+        -157.20008868687597
+      ],
+      "size": [
+        474.171875,
+        120
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            11,
+            12,
+            13
+          ]
+        }
+      ],
+      "title": "Prompt NEGATIVO — evitar deformaciones y artefactos acuáticos",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "(deformed, distorted:1.3), poorly drawn face, bad anatomy, missing limbs, extra limbs, floating limbs, (mutated hands:1.4), blurry, mutation, ugly, bad proportions, broken diving gear, melting wetsuit, distorted helmet, fish-like face, wrong uniform, asymmetrical body, unrealistic water physics"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "CLIPTextEncode",
+      "pos": [
+        989.9999607330567,
+        29.99986706263502
+      ],
+      "size": [
+        440,
+        150
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            14
+          ]
+        }
+      ],
+      "title": "Prompt LEVE — Arrecife de coral (denoise 0.30)",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "professional scuba diver in red and white peruvian jersey diving on coral reef, colorful reef fish swimming around, clear blue water with natural sunlight rays, detailed diving equipment and oxygen tank, sharp focus on diver face through transparent mask, tropical marine life, detailed facial features, underwater photography, 8k uhd, photorealistic"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "CLIPTextEncode",
+      "pos": [
+        989.9999607330567,
+        249.9999006319701
+      ],
+      "size": [
+        509.71875,
+        150
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 6
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            15
+          ]
+        }
+      ],
+      "title": "Prompt MODERADO — Exploración submarina profunda (denoise 0.60)",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "Peruvian diver in red and white national team jersey exploring deep ocean floor, exotic marine creatures swimming nearby, underwater caverns and rock formations, peruvian flag colors visible on wetsuit, dramatic underwater lighting with god rays, mysterious deep sea atmosphere, colorful bioluminescent organisms in distance, sharp detailed face in diving mask, cinematic underwater exploration, 8k uhd"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        989.9999607330567,
+        469.9999006319692
+      ],
+      "size": [
+        440,
+        150
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            16
+          ]
+        }
+      ],
+      "title": "Prompt FUERTE — Abismo marino épico (denoise 0.85)",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "epic Peruvian deep sea explorer in red and white jersey descending into abyssal trench, surrounded by bioluminescent creatures and alien-like deep sea life, peruvian flag colors glowing in darkness, massive tentacles and unknown creatures looming in shadows, dramatic volumetric underwater lighting, mystical aura around diver, peruvian emblem on suit, sharp detailed face in advanced diving helmet, surreal deep ocean expedition, cinematic horror-adventure, 8k uhd"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "KSampler",
+      "pos": [
+        1542.7999119049296,
+        -187.60009326451257
+      ],
+      "size": [
+        481.09375,
+        564.875
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 14
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 11
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 29
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            20
+          ]
+        }
+      ],
+      "title": "KSampler LEVE — euler / normal / steps 25 / cfg 7.0 / denoise 0.30",
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        144351329279759,
+        "randomize",
+        25,
+        15,
+        "euler",
+        "normal",
+        0.3
+      ]
+    },
+    {
+      "id": 8,
+      "type": "KSampler",
+      "pos": [
+        1520.3996311432109,
+        195.60001965052498
+      ],
+      "size": [
+        560.828125,
+        564.875
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 2
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 15
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 12
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 30
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            21
+          ]
+        }
+      ],
+      "title": "KSampler MODERADO — dpmpp_2m_karras / steps 30 / cfg 8.5 / denoise 0.60",
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        492210875267641,
+        "randomize",
+        30,
+        8.5,
+        "deis_2m_ode",
+        "karras",
+        0.6
+      ]
+    },
+    {
+      "id": 9,
+      "type": "KSampler",
+      "pos": [
+        1531.599838662742,
+        613.999796872203
+      ],
+      "size": [
+        509.4375,
+        564.875
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 16
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 13
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 31
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            22
+          ]
+        }
+      ],
+      "title": "KSampler FUERTE — dpm_adaptive / steps 40 / cfg 12.0 / denoise 0.85",
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        455149348956285,
+        "randomize",
+        50,
+        7,
+        "dpm_adaptive",
+        "karras",
+        0.85
+      ]
+    },
+    {
+      "id": 11,
+      "type": "VAEDecode",
+      "pos": [
+        2082.399728799459,
+        55.59987621790833
+      ],
+      "size": [
+        225,
+        71.59375
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 20
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            23
+          ]
+        }
+      ],
+      "title": "VAEDecode — LEVE",
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 12,
+      "type": "VAEDecode",
+      "pos": [
+        2111.1995334869584,
+        299.59973583704794
+      ],
+      "size": [
+        225,
+        71.59375
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 21
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 9
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            24
+          ]
+        }
+      ],
+      "title": "VAEDecode — MODERADO",
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 13,
+      "type": "VAEDecode",
+      "pos": [
+        2096.7998996978963,
+        517.9998212862658
+      ],
+      "size": [
+        225,
+        71.59375
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 22
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            25
+          ]
+        }
+      ],
+      "title": "VAEDecode — FUERTE",
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 14,
+      "type": "SaveImage",
+      "pos": [
+        2403.2001194244576,
+        -62.80017871373184
+      ],
+      "size": [
+        315,
+        315.578125
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 23
+        }
+      ],
+      "outputs": [],
+      "title": "Guardar LEVE — Arrecife de coral",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "lab4_marino/peru_buceo_leve_arrecife_coral"
+      ]
+    },
+    {
+      "id": 15,
+      "type": "SaveImage",
+      "pos": [
+        2391.9984348541448,
+        265.99971752650123
+      ],
+      "size": [
+        351.203125,
+        315.578125
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 24
+        }
+      ],
+      "outputs": [],
+      "title": "Guardar MODERADO — Exploración submarina",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "lab4_marino/peru_buceo_moderado_exploracion_submarina"
+      ]
+    },
+    {
+      "id": 16,
+      "type": "SaveImage",
+      "pos": [
+        2393.5990207916448,
+        677.9991987276715
+      ],
+      "size": [
+        315,
+        315.578125
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 25
+        }
+      ],
+      "outputs": [],
+      "title": "Guardar FUERTE — Abismo marino épico",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "lab4_marino/peru_buceo_fuerte_abismo_marino"
+      ]
+    },
+    {
+      "id": 19,
+      "type": "LoadImage",
+      "pos": [
+        149.80063822329453,
+        489.99977245814097
+      ],
+      "size": [
+        282.75,
+        339.59375
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            27
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "2e5388c9ab485da5c26cf3992932acd03adf9cc541857bbec9dca91f41911087.jpg",
+        "image"
+      ]
+    },
+    {
+      "id": 20,
+      "type": "VAEEncode",
+      "pos": [
+        579.5999241119647,
+        517.1999311495472
+      ],
+      "size": [
+        225,
+        71.59375
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 27
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 28
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            29,
+            30,
+            31
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "widgets_values": []
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      7,
+      0,
+      "MODEL"
+    ],
+    [
+      2,
+      2,
+      0,
+      8,
+      0,
+      "MODEL"
+    ],
+    [
+      3,
+      2,
+      0,
+      9,
+      0,
+      "MODEL"
+    ],
+    [
+      4,
+      2,
+      1,
+      3,
+      0,
+      "CLIP"
+    ],
+    [
+      5,
+      2,
+      1,
+      4,
+      0,
+      "CLIP"
+    ],
+    [
+      6,
+      2,
+      1,
+      5,
+      0,
+      "CLIP"
+    ],
+    [
+      7,
+      2,
+      1,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      8,
+      2,
+      2,
+      11,
+      1,
+      "VAE"
+    ],
+    [
+      9,
+      2,
+      2,
+      12,
+      1,
+      "VAE"
+    ],
+    [
+      10,
+      2,
+      2,
+      13,
+      1,
+      "VAE"
+    ],
+    [
+      11,
+      3,
+      0,
+      7,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      12,
+      3,
+      0,
+      8,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      13,
+      3,
+      0,
+      9,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      14,
+      4,
+      0,
+      7,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      15,
+      5,
+      0,
+      8,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      16,
+      6,
+      0,
+      9,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      20,
+      7,
+      0,
+      11,
+      0,
+      "LATENT"
+    ],
+    [
+      21,
+      8,
+      0,
+      12,
+      0,
+      "LATENT"
+    ],
+    [
+      22,
+      9,
+      0,
+      13,
+      0,
+      "LATENT"
+    ],
+    [
+      23,
+      11,
+      0,
+      14,
+      0,
+      "IMAGE"
+    ],
+    [
+      24,
+      12,
+      0,
+      15,
+      0,
+      "IMAGE"
+    ],
+    [
+      25,
+      13,
+      0,
+      16,
+      0,
+      "IMAGE"
+    ],
+    [
+      27,
+      19,
+      0,
+      20,
+      0,
+      "IMAGE"
+    ],
+    [
+      28,
+      2,
+      2,
+      20,
+      1,
+      "VAE"
+    ],
+    [
+      29,
+      20,
+      0,
+      7,
+      3,
+      "LATENT"
+    ],
+    [
+      30,
+      20,
+      0,
+      8,
+      3,
+      "LATENT"
+    ],
+    [
+      31,
+      20,
+      0,
+      9,
+      3,
+      "LATENT"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "LEVE (denoise 0.30) — Arrecife de coral profesional",
+      "bounding": [
+        980,
+        0,
+        1580,
+        280
+      ],
+      "color": "#3d7040",
+      "font_size": 18,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "MODERADO (denoise 0.60) — Exploración submarina profunda",
+      "bounding": [
+        980,
+        220,
+        1580,
+        280
+      ],
+      "color": "#7d6530",
+      "font_size": 18,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "FUERTE (denoise 0.85) — Abismo marino épico",
+      "bounding": [
+        980,
+        440,
+        1580,
+        280
+      ],
+      "color": "#7d3030",
+      "font_size": 18,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.45454545454545636,
+      "offset": [
+        268.4020534270944,
+        382.19229297154317
+      ]
+    },
+    "info": {
+      "name": "Lab4 Marino — Buceador en Fondo del Mar con Camiseta Peruana",
+      "custom_nodes_required": [],
+      "note": "Flujo Text2Img para generar escenas de buceo submarino con buceador en camiseta peruana roja y blanca. Variaciones: arrecife de coral, exploración profunda, abismo épico."
+    },
+    "frontendVersion": "1.42.6",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
